@@ -1,0 +1,7 @@
+## Interface: 11507
+## Title: combatrogue
+## Notes: addon for rogues
+## Author: You
+## Version: 1.0
+
+combatrogue.lua
