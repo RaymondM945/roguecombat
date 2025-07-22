@@ -10,15 +10,15 @@ box.texture:SetColorTexture(0, 0, 0, 1)
 box:SetScript("OnUpdate", function(self, elapsed)
 	box.texture:SetColorTexture(0, 0, 0, 1)
 	if IsInGroup() then
-		local targethealth = UnitHealth("target")
-		local targetmaxHealth = UnitHealthMax("target")
+		local targethealth = UnitHealth("party1target")
+		local targetmaxHealth = UnitHealthMax("party1target")
 		local hpPercent = (targethealth / targetmaxHealth) * 100
-		local energy = UnitPower("player", 3)
-		local comboPoints = GetComboPoints("player", "target")
-		local sametarget = UnitIsUnit("target", "party1target")
-
-		if UnitAffectingCombat("party1") and hpPercent < 90 then
+		if UnitAffectingCombat("party1") and hpPercent < 95 then
 			box.texture:SetColorTexture(1, 1, 0, 1)
+			local energy = UnitPower("player", 3)
+			local comboPoints = GetComboPoints("player", "target")
+			local sametarget = UnitIsUnit("target", "party1target")
+
 			local SinisterStrike = GetSpellInfo(1752)
 			local SSusable = IsUsableSpell(SinisterStrike)
 			local Eviscerate = GetSpellInfo("Eviscerate")
