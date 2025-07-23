@@ -1,4 +1,27 @@
 local isFollowing = nil
+local stopaddon = false
+
+local MyCheckbox = CreateFrame("CheckButton", "MyCheckboxExample", UIParent, "UICheckButtonTemplate")
+MyCheckbox:SetSize(30, 30)
+
+-- Anchor to the top center of the screen
+MyCheckbox:SetPoint("TOP", UIParent, "TOP", 0, -20) -- 20 pixels down from the top
+
+MyCheckbox.text = MyCheckbox:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+MyCheckbox.text:SetPoint("LEFT", MyCheckbox, "RIGHT", 5, 0)
+MyCheckbox.text:SetText("stop addon")
+
+MyCheckbox:SetChecked(stopaddon)
+
+MyCheckbox:SetScript("OnClick", function(self)
+	if self:GetChecked() then
+		print("Checkbox is checked!")
+		stopaddon = true
+	else
+		print("Checkbox is unchecked!")
+		stopaddon = false
+	end
+end)
 
 local box = CreateFrame("Frame", "CombatRogueCenterBox", UIParent)
 box:SetSize(25, 25)
@@ -9,7 +32,7 @@ box.texture:SetColorTexture(0, 0, 0, 1)
 
 box:SetScript("OnUpdate", function(self, elapsed)
 	box.texture:SetColorTexture(0, 0, 0, 1)
-	if IsInGroup() then
+	if IsInGroup() and not stopaddon then
 		local targethealth = UnitHealth("party1target")
 		local targetmaxHealth = UnitHealthMax("party1target")
 		local hpPercent = (targethealth / targetmaxHealth) * 100
