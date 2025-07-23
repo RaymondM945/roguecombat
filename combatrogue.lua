@@ -46,8 +46,18 @@ box:SetScript("OnUpdate", function(self, elapsed)
 			local SSusable = IsUsableSpell(SinisterStrike)
 			local Eviscerate = GetSpellInfo("Eviscerate")
 			local isEviscerateUsable = IsUsableSpell(Eviscerate)
+			local healthplayer = UnitHealth("player")
+			local maxplayerHealth = UnitHealthMax("player")
 
-			if not sametarget then
+			local hpPercentplayer = (healthplayer / maxplayerHealth) * 100
+
+			local start, duration, enable = C_Container.GetContainerItemCooldown(0, 1)
+
+			local canusePotion = start == 0 and duration == 0 and enable == 1
+
+			if canusePotion and hpPercentplayer < 40 then
+				box.texture:SetColorTexture(0.5, 0.5, 0.5, 1)
+			elseif not sametarget then
 				box.texture:SetColorTexture(0, 0, 1, 1)
 			elseif not isFollowing then
 				box.texture:SetColorTexture(1, 1, 1, 1)
