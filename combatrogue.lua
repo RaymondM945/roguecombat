@@ -55,7 +55,7 @@ box:SetScript("OnUpdate", function(self, elapsed)
 
 			local canusePotion = start == 0 and duration == 0 and enable == 1
 
-			if canusePotion and hpPercentplayer < 40 then
+			if canusePotion and hpPercentplayer < 90 then
 				box.texture:SetColorTexture(0.5, 0.5, 0.5, 1)
 			elseif not sametarget then
 				box.texture:SetColorTexture(0, 0, 1, 1)
